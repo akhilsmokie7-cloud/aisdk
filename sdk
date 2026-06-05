@@ -1,0 +1,50 @@
+# Getting Started with Vercel AI SDK (TypeScript)
+
+## Step 1: Install Dependencies
+
+```bash
+npm install @composio/core @composio/vercel ai @ai-sdk/anthropic
+```
+
+## Step 2: Set Environment Variables
+
+```
+COMPOSIO_API_KEY=<your-api-key>
+```
+
+## Step 3: Create Your Agent
+
+```typescript
+// agent.ts — Vercel AI SDK + Composio
+
+import { anthropic } from "@ai-sdk/anthropic";
+import { Composio } from "@composio/core";
+import { VercelProvider } from "@composio/vercel";
+import { stepCountIs, streamText } from "ai";
+
+const composio = new Composio({ provider: new VercelProvider() });
+const userId = "user_5zns2h";
+
+// Create a tool router session
+const session = await composio.create(userId);
+const tools = await session.tools();
+
+const stream = await streamText({
+  model: anthropic("claude-sonnet-4-6"),
+  prompt: "Star the composiohq/composio repo on GitHub",
+  stopWhen: stepCountIs(10),
+  tools,
+});
+
+for await (const textPart of stream.textStream) {
+  process.stdout.write(textPart);
+}
+```
+
+---
+
+## Documentation
+
+- [Composio Documentation](https://docs.composio.dev)
+- [Tool Router Guide](https://docs.composio.dev/tool-router/overview)
+- [Managing Multiple Accounts](https://docs.composio.dev/tool-router/managing-multiple-accounts)
