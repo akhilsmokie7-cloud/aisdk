@@ -730,4 +730,4 @@ Planned additions:
 
 Conclusion
 
-The design system serves as the foundation for consistent, accessible, and scalable user experiences. Tokens remain the source of truth, semantic aliases provide stability, and components consume shared primitives to ensure long-term maintainability.# aisdk
+The design AKsystem serves as the foundation for consistent, accessible, and scalable user experiences. Tokens remain the source of truth, semantic aliases provide stability, and components consume shared primitives to ensure long-term maintainability.# aisdk
